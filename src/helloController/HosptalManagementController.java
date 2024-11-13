@@ -1,7 +1,6 @@
 package helloController;
 
 import java.util.Scanner;
-
 import helloCrud.AppointmentCrud;
 import helloCrud.HealthRecordCrud;
 import helloCrud.InventoryCrud;
@@ -9,15 +8,15 @@ import helloCrud.InvoiceCrud;
 import helloCrud.PatientCrud;
 import helloCrud.StaffCrud;
 
-
 public class HosptalManagementController {
-	public static void main(String[] args) {
-        AppointmentCrud system = new AppointmentCrud ();
-        HealthRecordCrud system1=new HealthRecordCrud();
-        InventoryCrud system2=new InventoryCrud();
-        InvoiceCrud system3=new InvoiceCrud();
-        PatientCrud system4=new PatientCrud();
-        StaffCrud system5=new StaffCrud();
+    public static void main(String[] args) {
+        AppointmentCrud appointmentCrud = new AppointmentCrud();
+        HealthRecordCrud healthRecordCrud = new HealthRecordCrud();
+        InventoryCrud inventoryCrud = new InventoryCrud();
+        InvoiceCrud invoiceCrud = new InvoiceCrud();
+        PatientCrud patientCrud = new PatientCrud();
+        StaffCrud staffCrud = new StaffCrud();
+        
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -26,15 +25,17 @@ public class HosptalManagementController {
             System.out.println("2. View Patients");
             System.out.println("3. Schedule Appointment");
             System.out.println("4. View Appointments");
-            System.out.println("5. Add health record for a patient");
-            System.out.println("6. View health records of a patient");
-            System.out.println("7. View All health records of a patient");
-            System.out.println("8. Add a new staff member");
-            System.out.println("9. View all staff members");
-            System.out.println("10. Update staff details");
-            System.out.println("11. Create an invoice");
-            System.out.println("12. Manage inventory");
-            System.out.println("13. Exit");
+            System.out.println("5. Add Health Record for a Patient");
+            System.out.println("6. View Health Records of a Patient");
+            System.out.println("7. View All Health Records of a Patient");
+            System.out.println("8. Add a New Staff Member");
+            System.out.println("9. View All Staff Members");
+            System.out.println("10. Update Staff Details");
+            System.out.println("11. Create Bill");
+            System.out.println("12. Display All Invoices");
+            System.out.println("13. Display Invoice by Patient ID");
+            System.out.println("14. Manage Inventory");
+            System.out.println("15. Exit");
             System.out.print("Enter choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); 
@@ -50,45 +51,64 @@ public class HosptalManagementController {
                     String address = scanner.nextLine();
                     System.out.print("Enter contact info: ");
                     String contactInfo = scanner.nextLine();
-                    system4.registerPatient(name, age, address, contactInfo);
+                    patientCrud.registerPatient(name, age, address, contactInfo);
                     break;
 
                 case 2:
-                    system4.viewPatients();
+                    patientCrud.viewPatients();
                     break;
 
                 case 3:
-                   system.scheduleAppointment();
+                    appointmentCrud.scheduleAppointment();
                     break;
 
                 case 4:
-                    system.viewAppointments();
+                    appointmentCrud.viewAppointments();
                     break;
+
                 case 5:
-                	system1.addHealthRecord();
+                    healthRecordCrud.addHealthRecord();
                     break;
+
                 case 6:
-                	system1.viewHealthRecords();
+                    healthRecordCrud.viewHealthRecords();
                     break;
+
                 case 7:
-                	system1.viewAllHealthRecords();
+                    healthRecordCrud.viewAllHealthRecords();
                     break;
+
                 case 8:
-                	system5.addStaff();
+                    staffCrud.addStaff();
                     break;
+
                 case 9:
-                	system5.viewStaff();
+                    staffCrud.viewStaff();
                     break;
+
                 case 10:
-                	system5.updateStaff();
+                    staffCrud.updateStaff();
                     break;
+
                 case 11:
-                	system3.createInvoice();
+                    invoiceCrud.processBilling();
                     break;
+
                 case 12:
-                	system2.displayMenu();
+                    invoiceCrud.displayInvoices();
                     break;
+
                 case 13:
+                    System.out.print("Enter Patient ID to display invoice: ");
+                    int patientId = scanner.nextInt();
+                    invoiceCrud.displayInvoiceByPatientId(patientId);
+                    break;
+
+                case 14:
+                    inventoryCrud.displayMenu();
+                    break;
+
+                case 15:
                     System.out.println("Exiting Hospital Management System.");
                     scanner.close();
                     return;
